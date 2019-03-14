@@ -1,0 +1,28 @@
+@startuml
+!pragma horizontalLineBetweenDifferentPackageAllowed
+
+actor User1
+actor User2
+actor User3
+
+node "Docker Container" #FEFECE {
+   [App] as APP1 #pink
+   [App] as APP2 #pink
+   database MongoDB as DB #blue
+   cloud Redis #orange
+}
+
+User1 <-down-> APP1: HTTP
+User2 <-down-> APP2: HTTP
+User3 <-down-> APP2: HTTP
+APP1 -up-> User1: WebSocket
+APP2 -up-> User2: WebSocket
+APP1 -up-> User3: WebSocket
+APP1 -down-> Redis: Pub
+APP2 -down-> Redis: Pub
+Redis -up-> APP1: Sub
+Redis -up-> APP2: Sub
+APP1 -left-> DB
+APP2 -right-> DB
+
+@enduml
