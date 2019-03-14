@@ -36,6 +36,5 @@
    
    <modules>
 		<module>messaging</module>
-      <module>docs</module>
    </modules>
 </project>

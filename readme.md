@@ -4,7 +4,7 @@ This application allows users to post and view messages.
 
 ## Deployment Diagram
 
-![Uml diagram](docs/src/deployment.png)
+![Uml diagram](docs/deployment.png)
 
 ## Getting Started
 
