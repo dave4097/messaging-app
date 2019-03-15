@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.david.messaging.json.ZonedDateTimeJsonDeserializer;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
 
 @Getter
@@ -19,9 +21,11 @@ import java.time.ZonedDateTime;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Message {
 
+   @NotBlank
    private String content;
 
    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ssZ")
    @JsonDeserialize(using = ZonedDateTimeJsonDeserializer.class)
+   @NotNull
    private ZonedDateTime timestamp;
 }

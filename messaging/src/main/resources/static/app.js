@@ -49,7 +49,12 @@ function sendMessage() {
             "timestamp": moment(new Date()).format("YYYY-MM-DD HH:mm:ssZZ")
         }),
         contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        dataType: "json",
+        statusCode: {
+            400: function() {
+                alert("Invalid message!");
+            }
+        }
     });
 }
 

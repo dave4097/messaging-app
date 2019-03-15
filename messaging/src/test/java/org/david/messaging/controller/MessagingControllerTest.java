@@ -38,7 +38,7 @@ public class MessagingControllerTest {
    private MessagingService messagingService;
 
    @Test
-   public void shouldPostMessage() throws Exception {
+   public void shouldPostValidMessage() throws Exception {
       mockMvc.perform(
             post("/messaging")
                   .contentType(MediaType.APPLICATION_JSON)
@@ -48,6 +48,26 @@ public class MessagingControllerTest {
 
       verify(messagingService).processMessage(new Message(
             "abrakadabra", ZonedDateTime.parse("2018-10-09T00:12:12+01:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME)));
+   }
+
+   @Test
+   public void shouldReturn400WhenInvalidContent() throws Exception {
+      mockMvc.perform(
+            post("/messaging")
+                  .contentType(MediaType.APPLICATION_JSON)
+                  .content("{\"content\": \"\",\"timestamp\": \"2018-10-09 00:12:12+0100\"}"))
+            .andDo(print())
+            .andExpect(status().isBadRequest());
+   }
+
+   @Test
+   public void shouldReturn400WhenInvalidTimestamp() throws Exception {
+      mockMvc.perform(
+            post("/messaging")
+                  .contentType(MediaType.APPLICATION_JSON)
+                  .content("{\"content\": \"abrakadabra\",\"timestamp\": null}"))
+            .andDo(print())
+            .andExpect(status().isBadRequest());
    }
 
    @Test
