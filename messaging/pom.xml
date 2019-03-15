@@ -20,6 +20,10 @@
       </dependency>
       <dependency>
          <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-websocket</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-logging</artifactId>
       </dependency>
       <dependency>
@@ -33,6 +37,30 @@
       <dependency>
          <groupId>io.springfox</groupId>
          <artifactId>springfox-swagger-ui</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>webjars-locator-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>sockjs-client</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>stomp-websocket</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>bootstrap</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>jquery</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>momentjs</artifactId>
       </dependency>
       <dependency>
          <groupId>org.springframework.boot</groupId>

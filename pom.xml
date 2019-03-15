@@ -16,6 +16,11 @@
 
    <properties>
       <swagger.version>2.9.2</swagger.version>
+      <stompjs-client.version>1.0.2</stompjs-client.version>
+      <stomp-websocket.version>2.3.3</stomp-websocket.version>
+      <bootstrap.version>3.3.7</bootstrap.version>
+      <jquery.version>3.1.0</jquery.version>
+      <moment.version>2.22.2</moment.version>
       <main.basedir>${basedir}/../..</main.basedir>
    </properties>
 
@@ -31,10 +36,35 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>${swagger.version}</version>
          </dependency>
+         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>sockjs-client</artifactId>
+            <version>${stompjs-client.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>stomp-websocket</artifactId>
+            <version>${stomp-websocket.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${bootstrap.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${jquery.version}</version>
+         </dependency>
+         <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>momentjs</artifactId>
+            <version>${moment.version}</version>
+         </dependency>
       </dependencies>
    </dependencyManagement>
-   
+
    <modules>
-		<module>messaging</module>
+      <module>messaging</module>
    </modules>
 </project>
