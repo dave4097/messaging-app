@@ -10,6 +10,12 @@ function setConnected(connected) {
         $("#conversation").hide();
     }
     $("#messages").html("");
+    $.get("/messaging", function(messagesWrapper, status) {
+        var messageArray = messagesWrapper.messages;
+        for (var i = 0; i < messageArray.length; i++) {
+            showMessage(messageArray[i]);
+        }
+    });
 }
 
 function connect() {
@@ -19,7 +25,8 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/message', function (message) {
-            showMessage(JSON.parse(message.body).content);
+            var parsedMessage = JSON.parse(message.body);
+            showMessage(parsedMessage);
         });
     });
 }
@@ -47,14 +54,17 @@ function sendMessage() {
 }
 
 function showMessage(message) {
-    $("#messages").append("<tr><td>" + message + "</td></tr>");
+    var maxPalindromeLength = message.maxPalindromeLength == undefined ? "" : message.maxPalindromeLength;
+    $("#messages").append("<tr><td>" + message.content + "</td><td>" + message.timestamp + "</td><td>" + maxPalindromeLength + "</td></tr>");
 }
 
 $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
-    $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendMessage(); });
+    $("#connect").click(function() {
+        connect();
+    });
+    $("#disconnect").click(function() { disconnect(); });
+    $("#send").click(function() { sendMessage(); });
 });

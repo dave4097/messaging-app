@@ -22,6 +22,17 @@ public class ZonedDateTimeJsonDeserializerTest {
 
       ZonedDateTime zonedDateTime = deserializer.deserialize(jsonParser, null);
 
-      assertThat(zonedDateTime.getOffset()).isNotNull();
+      assertThat(zonedDateTime).isNotNull();
+   }
+
+   @Test
+   public void shouldHandleNull() throws Exception {
+      JsonParser jsonParser = mock(ParserBase.class);
+
+      when(jsonParser.getText()).thenReturn(null);
+
+      ZonedDateTime zonedDateTime = deserializer.deserialize(jsonParser, null);
+
+      assertThat(zonedDateTime).isNull();
    }
 }

@@ -15,5 +15,5 @@ import java.util.List;
 @NoArgsConstructor
 public class Messages {
 
-   private List<Message> messages;
+   private List<MessageWithPalindromeInfo> messages;
 }
