@@ -1,5 +1,6 @@
 package org.david.messaging.domain;
 
+import org.david.messaging.pubsub.InternalMessageBroadcaster;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.when;
 public class MessagingServiceTest {
 
    @Mock
-   private WebBroadcaster webBroadcaster;
+   private InternalMessageBroadcaster internalMessageBroadcaster;
 
    @Mock
    private MessageRepository messageRepository;
@@ -27,7 +28,7 @@ public class MessagingServiceTest {
 
    @Before
    public void setUp() {
-      messagingService = new MessagingService(webBroadcaster, messageRepository);
+      messagingService = new MessagingService(internalMessageBroadcaster, messageRepository);
    }
 
    @Test
@@ -63,8 +64,8 @@ public class MessagingServiceTest {
 
       messagingService.processMessage(message);
 
-      InOrder inOrder = inOrder(messageRepository, webBroadcaster);
+      InOrder inOrder = inOrder(messageRepository, internalMessageBroadcaster);
       inOrder.verify(messageRepository).save(message);
-      inOrder.verify(webBroadcaster).broadcast(message);
+      inOrder.verify(internalMessageBroadcaster).broadcastToAllInstances(message);
    }
 }

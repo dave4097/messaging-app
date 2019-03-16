@@ -2,7 +2,9 @@ package org.david.messaging;
 
 import lombok.extern.slf4j.Slf4j;
 import org.david.messaging.domain.Message;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,9 @@ import org.springframework.web.socket.messaging.WebSocketStompClient;
 import org.springframework.web.socket.sockjs.client.SockJsClient;
 import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
+import redis.embedded.RedisServer;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,12 +44,26 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @Slf4j
 public class ApplicationIntegrationTest {
 
+   private static RedisServer redisServer;
+
    @Autowired
    private MockMvc mockMvc;
    @LocalServerPort
    private int port;
    private String url;
    private CompletableFuture<Message> completableFuture;
+
+   @BeforeClass
+   public static void startRedisServer() throws IOException {
+      redisServer = new RedisServer(6380);
+      redisServer.start();
+      log.info("Redis server started on {}, active={}", redisServer.ports(), redisServer.isActive());
+   }
+
+   @AfterClass
+   public static void stopRedisServer() {
+      redisServer.stop();
+   }
 
    @Before
    public void setup() {

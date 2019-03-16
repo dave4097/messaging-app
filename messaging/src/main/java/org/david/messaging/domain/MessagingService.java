@@ -1,6 +1,7 @@
 package org.david.messaging.domain;
 
 import lombok.extern.slf4j.Slf4j;
+import org.david.messaging.pubsub.InternalMessageBroadcaster;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,12 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class MessagingService {
 
-   private final WebBroadcaster webBroadcaster;
+   private final InternalMessageBroadcaster internalMessageBroadcaster;
    private final MessageRepository messageRepository;
 
    @Autowired
-   public MessagingService(WebBroadcaster webBroadcaster, MessageRepository messageRepository) {
-      this.webBroadcaster = webBroadcaster;
+   public MessagingService(InternalMessageBroadcaster internalMessageBroadcaster, MessageRepository messageRepository) {
+      this.internalMessageBroadcaster = internalMessageBroadcaster;
       this.messageRepository = messageRepository;
    }
 
@@ -29,7 +30,7 @@ public class MessagingService {
    public void processMessage(Message message) {
       log.info("Processing message {}", message);
       messageRepository.save(message);
-      webBroadcaster.broadcast(message);
+      internalMessageBroadcaster.broadcastToAllInstances(message);
    }
 
    private MessageWithPalindromeInfo enrichWithPalindromeMaxLength(Message message) {
