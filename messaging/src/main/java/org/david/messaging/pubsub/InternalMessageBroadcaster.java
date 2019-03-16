@@ -1,6 +1,6 @@
 package org.david.messaging.pubsub;
 
-import org.david.messaging.domain.Message;
+import org.david.messaging.domain.ViewableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -18,7 +18,7 @@ public class InternalMessageBroadcaster {
       this.channelTopic = channelTopic;
    }
 
-   public void broadcastToAllInstances(final Message message) {
-      redisTemplate.convertAndSend(channelTopic.getTopic(), message);
+   public void broadcastToAllInstances(ViewableMessage posting) {
+      redisTemplate.convertAndSend(channelTopic.getTopic(), posting);
    }
 }

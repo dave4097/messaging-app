@@ -1,7 +1,7 @@
 package org.david.messaging.pubsub;
 
 import lombok.extern.slf4j.Slf4j;
-import org.david.messaging.domain.Message;
+import org.david.messaging.domain.ViewableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
@@ -18,8 +18,8 @@ public class WebBroadcaster {
       this.simpMessagingTemplate = simpMessagingTemplate;
    }
 
-   public void broadcast(Message message) {
-      simpMessagingTemplate.convertAndSend(MESSAGE_TOPIC, message);
-      log.info("Sent message {} on topic {}", message, MESSAGE_TOPIC);
+   public void broadcast(ViewableMessage posting) {
+      simpMessagingTemplate.convertAndSend(MESSAGE_TOPIC, posting);
+      log.info("Sent message {} on websocket topic {}", posting, MESSAGE_TOPIC);
    }
 }

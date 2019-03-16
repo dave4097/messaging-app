@@ -3,8 +3,8 @@ package org.david.messaging.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.david.messaging.domain.Message;
-import org.david.messaging.domain.Messages;
 import org.david.messaging.domain.MessagingService;
+import org.david.messaging.domain.ViewableMessageIterableWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -42,7 +42,7 @@ public class MessagingController {
          produces = "application/JSON"
    )
    @GetMapping
-   public Messages getAllMessages() {
+   public ViewableMessageIterableWrapper getAllMessages() {
       return messagingService.getAllMessages();
    }
 

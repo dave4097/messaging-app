@@ -1,7 +1,7 @@
 package org.david.messaging.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.david.messaging.domain.Message;
+import org.david.messaging.domain.ViewableMessage;
 import org.david.messaging.pubsub.InternalMessageListener;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -13,10 +13,12 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
+import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 
 @Configuration
+@EnableRedisRepositories(basePackages = "org.david.messaging.domain")
 public class RedisConfig {
 
    @Value("${spring.redis.host}")
@@ -33,15 +35,15 @@ public class RedisConfig {
    }
 
    @Bean
-   public RedisSerializer<Message> redisJsonSerializer(ObjectMapper objectMapper) {
-      Jackson2JsonRedisSerializer<Message> serializer = new Jackson2JsonRedisSerializer<>(Message.class);
+   public RedisSerializer<ViewableMessage> redisJsonSerializer(ObjectMapper objectMapper) {
+      Jackson2JsonRedisSerializer<ViewableMessage> serializer = new Jackson2JsonRedisSerializer<>(ViewableMessage.class);
       serializer.setObjectMapper(objectMapper);
       return serializer;
    }
 
    @Bean
    public RedisTemplate<String, Object> redisTemplate(JedisConnectionFactory jedisConnectionFactory,
-                                                      RedisSerializer<Message> redisJsonSerializer) {
+                                                      RedisSerializer<ViewableMessage> redisJsonSerializer) {
       final RedisTemplate<String, Object> template = new RedisTemplate<>();
       template.setConnectionFactory(jedisConnectionFactory);
       template.setValueSerializer(redisJsonSerializer);
@@ -50,7 +52,7 @@ public class RedisConfig {
 
    @Bean
    public MessageListenerAdapter messageListenerAdapter(InternalMessageListener internalMessageListener,
-                                                        RedisSerializer<Message> redisJsonSerializer) {
+                                                        RedisSerializer<ViewableMessage> redisJsonSerializer) {
       MessageListenerAdapter messageListenerAdapter = new MessageListenerAdapter(internalMessageListener);
       messageListenerAdapter.setSerializer(redisJsonSerializer);
       return messageListenerAdapter;

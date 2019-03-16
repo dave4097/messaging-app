@@ -1,7 +1,8 @@
 package org.david.messaging;
 
 import lombok.extern.slf4j.Slf4j;
-import org.david.messaging.domain.Message;
+import org.david.messaging.domain.MessagingService;
+import org.david.messaging.domain.ViewableMessage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -48,10 +49,12 @@ public class ApplicationIntegrationTest {
 
    @Autowired
    private MockMvc mockMvc;
+   @Autowired
+   private MessagingService messagingService;
    @LocalServerPort
    private int port;
    private String url;
-   private CompletableFuture<Message> completableFuture;
+   private CompletableFuture<ViewableMessage> completableFuture;
 
    @BeforeClass
    public static void startRedisServer() throws IOException {
@@ -87,9 +90,10 @@ public class ApplicationIntegrationTest {
                   .contentType(MediaType.APPLICATION_JSON)
                   .content("{\"content\": \"abrakadabra\",\"timestamp\": \"2018-10-09 00:12:12+0100\"}"));
 
-      Message message = completableFuture.get(5, TimeUnit.SECONDS);
+      ViewableMessage posting = completableFuture.get(5, TimeUnit.SECONDS);
 
-      assertThat(message).isNotNull();
+      assertThat(posting).isNotNull();
+      assertThat(messagingService.getAllMessages().getMessages()).hasSize(1);
    }
 
    private List<Transport> createTransportClient() {
@@ -101,12 +105,12 @@ public class ApplicationIntegrationTest {
    private class MessagingStompFrameHandler implements StompFrameHandler {
       @Override
       public Type getPayloadType(StompHeaders stompHeaders) {
-         return Message.class;
+         return ViewableMessage.class;
       }
 
       @Override
       public void handleFrame(StompHeaders stompHeaders, Object o) {
-         completableFuture.complete((Message) o);
+         completableFuture.complete((ViewableMessage) o);
       }
    }
 }

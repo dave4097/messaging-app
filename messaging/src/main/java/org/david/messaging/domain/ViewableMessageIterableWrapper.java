@@ -1,19 +1,18 @@
 package org.david.messaging.domain;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-import java.util.List;
-
 @ToString
 @Getter
 @EqualsAndHashCode
 @AllArgsConstructor
-@NoArgsConstructor
-public class Messages {
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class ViewableMessageIterableWrapper {
 
-   private List<MessageWithPalindromeInfo> messages;
+   private Iterable<ViewableMessage> messages;
 }

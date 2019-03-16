@@ -1,9 +1,9 @@
 package org.david.messaging.controller;
 
 import org.david.messaging.domain.Message;
-import org.david.messaging.domain.MessageWithPalindromeInfo;
-import org.david.messaging.domain.Messages;
 import org.david.messaging.domain.MessagingService;
+import org.david.messaging.domain.ViewableMessage;
+import org.david.messaging.domain.ViewableMessageIterableWrapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +73,9 @@ public class MessagingControllerTest {
    @Test
    public void shouldGetAllMessages() throws Exception {
       ZonedDateTime zonedDateTime = ZonedDateTime.parse("2018-10-09T00:12:12+01:00", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-      MessageWithPalindromeInfo message = new MessageWithPalindromeInfo(
-            new Message("abrakadabra", zonedDateTime), 3);
-      when(messagingService.getAllMessages()).thenReturn(new Messages(singletonList(message)));
+      ViewableMessage posting = new ViewableMessage(
+            "1", new Message("abrakadabra", zonedDateTime), 3);
+      when(messagingService.getAllMessages()).thenReturn(new ViewableMessageIterableWrapper(singletonList(posting)));
 
       mockMvc.perform(get("/messaging"))
             .andDo(print())

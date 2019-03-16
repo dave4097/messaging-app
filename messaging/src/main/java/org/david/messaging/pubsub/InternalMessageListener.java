@@ -1,10 +1,12 @@
 package org.david.messaging.pubsub;
 
-import org.david.messaging.domain.Message;
+import lombok.extern.slf4j.Slf4j;
+import org.david.messaging.domain.ViewableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class InternalMessageListener {
 
    private final WebBroadcaster webBroadcaster;
@@ -14,7 +16,8 @@ public class InternalMessageListener {
       this.webBroadcaster = webBroadcaster;
    }
 
-   public void handleMessage(Message message) {
-      webBroadcaster.broadcast(message);
+   public void handleMessage(ViewableMessage posting) {
+      log.info("Received message on internal topic: {}", posting);
+      webBroadcaster.broadcast(posting);
    }
 }

@@ -5,11 +5,11 @@ actor User1
 actor User2
 actor User3
 
-node "Docker Container" #FEFECE {
-   [App] as APP1 #pink
-   [App] as APP2 #pink
-   database MongoDB as DB #blue
-   cloud Redis #orange
+[App1] as APP1 #pink
+[App2] as APP2 #pink
+node Redis {
+   database DB as DB #blue
+   artifact PubSub as PS #orange
 }
 
 User1 <-down-> APP1: HTTP
@@ -18,11 +18,9 @@ User3 <-down-> APP2: HTTP
 APP1 -up-> User1: WebSocket
 APP2 -up-> User2: WebSocket
 APP1 -up-> User3: WebSocket
-APP1 -down-> Redis: Pub
-APP2 -down-> Redis: Pub
-Redis -up-> APP1: Sub
-Redis -up-> APP2: Sub
-APP1 -left-> DB
-APP2 -right-> DB
+APP1 <--> PS
+APP2 <--> PS
+APP1 <--> DB
+APP2 <--> DB
 
 @enduml
