@@ -92,6 +92,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
          </plugin>
+         <plugin>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>${dockerfile-maven-version}</version>
+            <configuration>
+               <repository>david/messaging</repository>
+            </configuration>
+         </plugin>
       </plugins>
    </build>
 

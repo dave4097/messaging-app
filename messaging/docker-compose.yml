@@ -1,0 +1,17 @@
+version: '3'
+services:
+  redis:
+    image: redis:alpine
+  messaging:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: david/messaging
+    ports:
+      - 8080
+    networks:
+      - network1
+    scale: 3
+
+networks:
+  network1:

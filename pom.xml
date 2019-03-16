@@ -22,6 +22,7 @@
       <jquery.version>3.1.0</jquery.version>
       <moment.version>2.22.2</moment.version>
       <embedded-redis.version>0.6</embedded-redis.version>
+      <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
       <main.basedir>${basedir}/../..</main.basedir>
    </properties>
 
