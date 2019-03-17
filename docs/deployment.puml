@@ -1,12 +1,12 @@
 @startuml
 !pragma horizontalLineBetweenDifferentPackageAllowed
 
-actor User1
-actor User2
-actor User3
+actor User as User1
+actor User as User2
+actor User as User3
 
-[App1] as APP1 #pink
-[App2] as APP2 #pink
+[App] as APP1 #pink
+[App] as APP2 #pink
 node Redis {
    database DB as DB #blue
    artifact PubSub as PS #orange

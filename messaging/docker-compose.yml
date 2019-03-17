@@ -2,16 +2,38 @@ version: '3'
 services:
   redis:
     image: redis:alpine
-  messaging:
+    ports:
+      - "6379:6379"
+  messaging-1:
     build:
       context: ./
       dockerfile: Dockerfile
     image: david/messaging
+    environment:
+      - SPRING_REDIS_HOST=redis
     ports:
       - 8080
-    networks:
-      - network1
-    scale: 3
-
-networks:
-  network1:
+    depends_on:
+      - redis
+  messaging-2:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: david/messaging
+    environment:
+      - SPRING_REDIS_HOST=redis
+    ports:
+      - 8080
+    depends_on:
+      - redis
+  messaging-3:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: david/messaging
+    environment:
+      - SPRING_REDIS_HOST=redis
+    ports:
+      - 8080
+    depends_on:
+      - redis
