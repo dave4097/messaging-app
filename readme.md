@@ -16,6 +16,8 @@ Build:
 
 > mvn clean install
 
+Note, if you do not have maven installed, you can use the included maven wrapper and run with mvnw.
+
 ### Standalone Local Deployment
 
 Note, you will need a local instance of Redis running on port 6379.
@@ -38,7 +40,7 @@ This starts Redis and 3 instances of the application.
 
 ### Multi-Instance Deployment Using Play With Docker
 
-Note that this is how the Docker setup was tested for this application.
+Note, this is how the Docker setup was tested for this application.
 
 1. Create a GitHub repo containing the files Dockerfile, docker-compose.yml and the application jar from this project.
 2. Go to [Play With Docker](https://labs.play-with-docker.com) and click Start and then Create Instance.
