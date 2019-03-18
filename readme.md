@@ -20,13 +20,13 @@ Build:
 
 Note, you will need a local instance of Redis running on port 6379.
 
-Go to the messaging module and run:
+Run:
 
 > mvn spring-boot:run
 
 To start multiple instances on different ports run:
 
-> mvn -Dserver.port=8081 spring-boot:run
+> mvn -Dserver.port=8081 spring-boot:run (or mvn -D"server.port"=8081 spring-boot:run)
 
 ### Multi-Instance Deployment Using Docker
 

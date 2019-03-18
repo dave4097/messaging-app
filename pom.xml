@@ -8,13 +8,15 @@
       <version>2.1.3.RELEASE</version>
    </parent>
 
-   <artifactId>messaging-parent</artifactId>
-   <groupId>org.david.pipeline</groupId>
+   <artifactId>messaging</artifactId>
+   <groupId>org.david.messaging</groupId>
    <name>Falcon.io exercise</name>
    <version>1.0-SNAPSHOT</version>
-   <packaging>pom</packaging>
+   <packaging>jar</packaging>
 
    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <java.version>11</java.version>
       <swagger.version>2.9.2</swagger.version>
       <stompjs-client.version>1.0.2</stompjs-client.version>
       <stomp-websocket.version>2.3.3</stomp-websocket.version>
@@ -23,56 +25,95 @@
       <moment.version>2.22.2</moment.version>
       <embedded-redis.version>0.6</embedded-redis.version>
       <dockerfile-maven-version>1.4.10</dockerfile-maven-version>
-      <main.basedir>${basedir}/../..</main.basedir>
    </properties>
 
-   <dependencyManagement>
-      <dependencies>
-         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>${swagger.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>sockjs-client</artifactId>
-            <version>${stompjs-client.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>stomp-websocket</artifactId>
-            <version>${stomp-websocket.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>${bootstrap.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>jquery</artifactId>
-            <version>${jquery.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>momentjs</artifactId>
-            <version>${moment.version}</version>
-         </dependency>
-         <dependency>
-            <groupId>com.github.kstyrc</groupId>
-            <artifactId>embedded-redis</artifactId>
-            <version>${embedded-redis.version}</version>
-            <scope>test</scope>
-         </dependency>
-      </dependencies>
-   </dependencyManagement>
+   <dependencies>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-websocket</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-logging</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-data-redis</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>redis.clients</groupId>
+         <artifactId>jedis</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.hibernate.validator</groupId>
+         <artifactId>hibernate-validator</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.projectlombok</groupId>
+         <artifactId>lombok</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>io.springfox</groupId>
+         <artifactId>springfox-swagger2</artifactId>
+         <version>${swagger.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>io.springfox</groupId>
+         <artifactId>springfox-swagger-ui</artifactId>
+         <version>${swagger.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>webjars-locator-core</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>sockjs-client</artifactId>
+         <version>${stompjs-client.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>stomp-websocket</artifactId>
+         <version>${stomp-websocket.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>bootstrap</artifactId>
+         <version>${bootstrap.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>jquery</artifactId>
+         <version>${jquery.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.webjars</groupId>
+         <artifactId>momentjs</artifactId>
+         <version>${moment.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-test</artifactId>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>com.github.kstyrc</groupId>
+         <artifactId>embedded-redis</artifactId>
+         <version>${embedded-redis.version}</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
 
-   <modules>
-      <module>messaging</module>
-   </modules>
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+         </plugin>
+      </plugins>
+   </build>
 </project>
