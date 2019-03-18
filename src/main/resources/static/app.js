@@ -60,7 +60,8 @@ function sendMessage() {
 
 function showMessage(message) {
     var maxPalindromeLength = message.maxPalindromeLength == undefined ? "" : message.maxPalindromeLength;
-    $("#messages").append("<tr><td>" + message.content + "</td><td>" + message.timestamp + "</td><td>" + maxPalindromeLength + "</td></tr>");
+    $("#messages").append("<tr><td id=\"" + message.id + "\"></td><td>" + message.timestamp + "</td><td>" + maxPalindromeLength + "</td></tr>");
+    $("#" + message.id).text(message.content);
 }
 
 $(function () {

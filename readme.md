@@ -42,7 +42,7 @@ This starts Redis and 3 instances of the application.
 
 Note, this is how the Docker setup was tested for this application.
 
-1. Create a GitHub repo containing the files Dockerfile, docker-compose.yml and the application jar from this project.
+1. Create a GitHub repo containing the files Dockerfile, docker-compose.yml and target/messaging-<version>.jar from this project.
 2. Go to [Play With Docker](https://labs.play-with-docker.com) and click Start and then Create Instance.
 3. Run:
    > apk add git --no-cache
