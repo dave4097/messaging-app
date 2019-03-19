@@ -18,7 +18,7 @@ public class InternalMessageBroadcaster {
       this.channelTopic = channelTopic;
    }
 
-   public void broadcastToAllInstances(ViewableMessage posting) {
-      redisTemplate.convertAndSend(channelTopic.getTopic(), posting);
+   public void broadcastToAllInstances(ViewableMessage message) {
+      redisTemplate.convertAndSend(channelTopic.getTopic(), message);
    }
 }

@@ -16,8 +16,8 @@ public class InternalMessageListener {
       this.webBroadcaster = webBroadcaster;
    }
 
-   public void handleMessage(ViewableMessage posting) {
-      log.info("Received message on internal topic: {}", posting);
-      webBroadcaster.broadcast(posting);
+   public void handleMessage(ViewableMessage message) {
+      log.info("Received message on internal topic: {}", message);
+      webBroadcaster.broadcast(message);
    }
 }

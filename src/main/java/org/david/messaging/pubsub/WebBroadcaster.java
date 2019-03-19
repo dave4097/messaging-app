@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class WebBroadcaster {
 
-   public static final String MESSAGE_TOPIC = "/topic/message";
+   private static final String MESSAGE_TOPIC = "/topic/message";
    private SimpMessagingTemplate simpMessagingTemplate;
 
    @Autowired
@@ -18,8 +18,8 @@ public class WebBroadcaster {
       this.simpMessagingTemplate = simpMessagingTemplate;
    }
 
-   public void broadcast(ViewableMessage posting) {
-      simpMessagingTemplate.convertAndSend(MESSAGE_TOPIC, posting);
-      log.info("Sent message {} on websocket topic {}", posting, MESSAGE_TOPIC);
+   public void broadcast(ViewableMessage message) {
+      simpMessagingTemplate.convertAndSend(MESSAGE_TOPIC, message);
+      log.info("Sent message {} on websocket topic {}", message, MESSAGE_TOPIC);
    }
 }
